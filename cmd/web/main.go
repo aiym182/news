@@ -8,7 +8,6 @@ import (
 	"github.com/aiym182/news/internal/config"
 	"github.com/aiym182/news/internal/handlers"
 	"github.com/aiym182/news/internal/render"
-	"github.com/joho/godotenv"
 )
 
 var webPort string
@@ -37,12 +36,7 @@ func main() {
 
 func run() error {
 
-	err := godotenv.Load("../../.env")
-	if err != nil {
-		log.Println("error loading env")
-		return err
-	}
-	webPort = os.Getenv("WEBPORT")
+	webPort = ":8080"
 
 	infoLog = log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
 	app.InfoLog = infoLog
