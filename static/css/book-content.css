@@ -16,7 +16,8 @@
 .news-paper {
   /* width: 612px; */
   /* height: 792px; */
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: auto;
 }
 .news-paper-wrapper {
   margin: 16px;
