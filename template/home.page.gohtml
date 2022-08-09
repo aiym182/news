@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/book-content.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+    <script src="/static/javascript/turn.min.js"></script>
+    <script type="text/javascript" src="/static/javascript/modernizr.2.5.3.min.js"></script> 
+ 
+    <title>국립백두대간수목원 | 시드볼트 뉴스</title>
+</head>
+<body>
+  <nav class="navbar has-shadow is-dark" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.bdna.or.kr/">
+        <img src="static/image/logo.png">
+      </a>
+      
+     
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu">
+        <div class="navbar-end mr-6">
+            <a class="navbar-item" style="display:flex; justify-content:center; align-items:center;" href="/"> <span class="material-symbols-outlined">
+                home
+                </span> &ensp; <p>메인페이지</P>  </a>
+            <a class="navbar-item" href="/en" style="display:flex; justify-content:center; align-items:center;"> 
+               <span class="material-symbols-outlined">
+                language
+                </span> &ensp; <p>English</p></a>
+        </div>
+      </div>
+  </nav>
+
+
+  <!-- main -->
+
+  <div class="main-body">
+      <!--book -->
+      <div id="newsbook" style="box-shadow:3px 3px 3px 3px rgba(202, 202, 202, 0.5)">
+       
+      </div>
+
+
+
+  </div>
+
+  <div class="bottom-wrapper">
+    <div class="bottom">
+        <div style="padding-left:42px;">
+            
+        </div>
+
+
+        <div class="controls">
+            <a id="firstBtn">
+                <div class="button-wrapper">
+                    <div class="circle">
+                        <span class="material-symbols-outlined">first_page</span>
+                    </div>
+                </div>
+            </a>
+           
+            <a id="leftBtn">
+                <div class="button-wrapper">
+                    <div class="circle">
+                        <span class="material-symbols-outlined">chevron_left</span>
+                    </div>
+                </div>
+            </a>
+          
+    
+            <div class="page-indicator">
+                <p id="current-page"> 1</p>
+                <p>/</p>
+                <p id="total-page"> 8 </p>
+            </div>    
+    
+            <a id ='rightBtn'>
+                <div class="button-wrapper">
+                    <div class="circle"><span class="material-symbols-outlined">
+                        chevron_right
+                    </span>
+                    </div>
+                </div>
+            </a>
+           
+            <a id="lastBtn">
+                <div class="button-wrapper">
+                    <div class="circle"><span class="material-symbols-outlined">
+                        last_page
+                        </span></div>
+                </div>
+            </a>
+          
+    
+        </div>
+    
+    <!-- zoom -->
+        <div style="padding-right:10px">
+            <a id="zoomBtn">
+                <div class="button-wrapper">
+                    <div class="circle">
+                        <span class="material-symbols-outlined">
+                            zoom_in
+                            </span>
+                    </div>
+                </div>
+
+            </a>
+          
+        </div>
+    </div> 
+  </div>
+
+    
+
+
+    
+
+    
+    <script type="text/javascript">
+
+
+
+        $(document).ready(function() {
+
+        // Check for click events on the navbar burger icon
+        $(".navbar-burger").click(function() {
+
+    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+            $(".navbar-burger").toggleClass("is-active");
+            $(".navbar-menu").toggleClass("is-active");
+
+        });
+        });
+
+        var book = $("#newsbook");
+
+        function nextPage(){
+            if (book){
+                book.turn('next')
+            }
+        }
+        function prevPage(){
+           if (book){
+            book.turn('previous')
+           }
+        }
+        var currentPage = $('#current-page');
+        var totalPage = $('#total-page');
+      
+
+        var rb = $('#rightBtn')
+        var lb = $('#leftBtn')
+        if (rb) {
+            rb.click((e)=>nextPage())
+        }
+        if (lb){
+            lb.click(e=>prevPage())
+        }  
+        
+        function getLastPage(){
+            if (book){
+                book.turn('page',8)
+            }
+        }
+        function getFirstPage(){
+            if (book){
+                book.turn('page',1)
+            }
+        }
+        var firstPageBtn = $('#firstBtn')
+        var lastPageBtn =$('#lastBtn')
+
+         firstPageBtn.click(e=>getFirstPage())
+        lastPageBtn.click(e=>getLastPage())
+
+        var zoomBtn =$('#zoomBtn')
+        function zoomPage(){
+
+            if(book){
+            
+               var pageNum = book.turn('page')
+               var currentP = $(".p"+pageNum)
+
+               if(currentP.hasClass("is-zoomed")){
+                currentP.css("zoom","100%")
+                book.turn('disable',false)
+                book.turn('zoom',1,5000)
+                currentP.removeClass("is-zoomed")
+               } else{
+                currentP.css("zoom","200%")
+                book.turn('disable',true)
+                book.turn('zoom',2,5000)
+                currentP.addClass("is-zoomed")
+               }
+
+            }
+        }
+        zoomBtn.click((e)=>zoomPage())
+
+        function loadPage(element,page){
+        $.ajax({url:'/pages/'+page,}).done((d)=>{
+            element.html(d)
+            },)
+        }
+
+        function addPage(page,book){
+
+          if (!book.turn('hasPage',page)){
+
+              var element = $('<div/>',{
+                  'class':'paper-wrapper',
+                  css:{'background-color':'white',
+                    }
+             })
+
+          if(book.turn('addPage',element,page)){
+            loadPage(element,page)
+          }
+        }
+   
+      }
+
+
+
+      if (book){
+        $("#newsbook").turn({
+        elevation:50,
+        gradients: true,
+        autoCenter: true,
+        display:'single',
+        pages:8,
+        when:{
+            turning: function(event,page,view){
+            currentPage.text(page)
+          },
+              missing: function (event,pages){
+            for (var i = 0; i < pages.length; i++) {
+              addPage(pages[i],$(this))
+            }
+          },
+        
+       
+        }
+      });
+      }
+   
+    </script>
+
+    </body>
+</html>
+

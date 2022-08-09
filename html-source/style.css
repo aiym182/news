@@ -1,0 +1,143 @@
+@import 'https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css';
+
+@font-face {
+  font-family: 'ChosunKm';
+  src: url('ChosunKm.TTF');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ChosunSm';
+  src: url('ChosunSm.TTF');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.news-paper {
+  width: 612px;
+  height: 792px;
+  background-color: white;
+}
+.news-paper-wrapper {
+  margin: 16px;
+  max-width: 580px;
+  max-height: 760px;
+}
+
+.head-wrapper .head-title {
+  height: 62px;
+  letter-spacing: -3px;
+  line-height: 1.2rem;
+  display: flex;
+  font-family: 'ChosunKm';
+  font-size: 42px;
+  justify-content: center;
+  align-items: center;
+}
+
+.head-wrapper .head-title:lang(en) {
+  font-family: 'Playfair Display', serif;
+  font-weight: 800;
+}
+.head-subtitle {
+  width: 100%;
+  height: 20px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  text-align: center;
+  font-family: 'ChosunKm';
+  font-size: 10px;
+}
+.head-subtitle:lang(en) {
+  font-family: 'Playfair Display', serif;
+  font-weight: bold;
+}
+.main-wrapper {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.main-wrapper .main-title {
+  text-align: center;
+  line-height: 1.2;
+  font-family: 'ChosunKm';
+  font-size: 20px;
+  padding-bottom: 5px;
+}
+.main-wrapper .main-title:lang(en) {
+  font-family: 'Playfair Display', serif;
+  font-weight: 800;
+}
+.main-wrapper .main-title.sub {
+  text-align: center;
+  line-height: 1.5;
+  font-family: 'ChosunKm';
+  font-size: 12px;
+}
+.main-wrapper .main-title.sub:lang(en) {
+  font-family: 'Playfair Display', serif;
+  font-weight: bold;
+  font-style: italic;
+}
+.main-wrapper .main-article {
+  line-height: 1.5em;
+  font-family: 'ChosunSm';
+  font-size: 10px;
+  text-align: justify;
+  letter-spacing: -3%;
+}
+
+.main-wrapper .main-article:lang(en) {
+  font-family: 'Droid Serif', serif;
+  line-height: 1.5em;
+  letter-spacing: -0.2px;
+}
+
+.section {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}
+.main-wrapper .main-article .special {
+  font-size: 9px;
+}
+.main-wrapper .main-article .special:lang(en) {
+  font-style: italic;
+}
+
+.main-wrapper .main-article.page3 .main-title {
+  text-align: center;
+  line-height: 1.2;
+  font-family: 'ChosunKm';
+  font-size: 20px;
+}
+.main-wrapper .main-article.page3 .main-title.sub {
+  text-align: center;
+  line-height: 1.5;
+  font-family: 'ChosunKm';
+  font-size: 12px;
+}
+.main-wrapper .section-wrapper {
+  display: flex;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.main-wrapper .section-wrapper.col {
+  flex-direction: column;
+}
+.main-wrapper .section-wrapper.row {
+  flex-direction: row;
+}
+
+.image-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
