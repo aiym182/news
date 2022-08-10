@@ -25,28 +25,61 @@
   max-height: 760px;
 }
 
-.head-wrapper .head-title {
+.head-wrapper .title-wrapper {
   height: 62px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.head-wrapper .title-wrapper .head-title {
   letter-spacing: -3px;
   line-height: 1.2rem;
   display: flex;
   font-family: 'ChosunKm';
   font-size: 42px;
-  justify-content: center;
-  align-items: center;
 }
-.head-wrapper .head-title:lang(en) {
+.head-wrapper .title-wrapper .head-title:lang(en) {
   font-family: 'Playfair Display', serif;
   font-weight: 800;
 }
+.head-wrapper .title-wrapper .title-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  width: 22%;
+  height: 60%;
+  font-size: 11px;
+  border: 3px double black;
+  font-family: 'ChosunKm';
+  line-height: 1.5em;
+  letter-spacing: -3%;
+  text-align: center;
+}
 
-.head-subtitle {
+.head-wrapper .title-wrapper .title-box:lang(en) {
+  font-family: 'Playfair Display', serif;
+}
+.head-wrapper .title-wrapper .title-box:lang(en) {
+  font-family: 'Playfair Display', serif;
+}
+.subhead-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   height: 20px;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
   padding-top: 2px;
   padding-bottom: 2px;
+}
+
+.subhead-wrapper a {
+  color: black;
+}
+
+.head-subtitle {
   text-align: center;
   font-family: 'ChosunKm';
   font-size: 10px;
@@ -85,13 +118,28 @@
   font-weight: bold;
   font-style: italic;
 }
-
+.main-wrapper .main-title.left {
+  text-align: left;
+}
+.main-wrapper .main-title.right {
+  text-align: right;
+}
+.main-wrapper .part-title {
+  line-height: 1.2;
+  font-family: 'ChosunKm';
+  font-size: 25px;
+  padding-bottom: 5px;
+}
+.main-wrapper .part-title:lang(en) {
+  font-family: 'Playfair Display', serif;
+  font-weight: bold;
+}
 .main-wrapper .main-article {
   line-height: 1.5em;
+  letter-spacing: -0.05em;
   font-family: 'ChosunSm';
   font-size: 10px;
   text-align: justify;
-  letter-spacing: -3%;
 }
 .main-wrapper .main-article:lang(en) {
   font-family: 'Droid Serif', serif;
@@ -105,24 +153,18 @@
   padding-right: 0.5rem;
   padding-left: 0.5rem;
 }
+
+.section .image-wrapper {
+  margin: auto;
+  text-align: center;
+}
 .main-wrapper .main-article .special {
   font-size: 9px;
 }
 
-.main-wrapper .main-article.page3 .main-title {
-  text-align: center;
-  line-height: 1.2;
-  font-family: 'ChosunKm';
-  font-size: 20px;
-}
-.main-wrapper .main-article.page3 .main-title.sub {
-  text-align: center;
-  line-height: 1.5;
-  font-family: 'ChosunKm';
-  font-size: 12px;
-}
 .main-wrapper .section-wrapper {
   display: flex;
+  justify-content: space-evenly;
   margin-top: 15px;
   margin-bottom: 15px;
 }
