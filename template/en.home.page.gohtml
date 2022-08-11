@@ -20,7 +20,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
     <script src="/static/javascript/turn.min.js"></script>
     <script type="text/javascript" src="/static/javascript/modernizr.2.5.3.min.js"></script> 
-        
+    <script type="text/javascript" src="/static/javascript/modal.js"></script>
 
  
     <title>Baekdudaegan National Aboretum | Seed Vault News</title>
@@ -57,15 +57,46 @@ home
   <!-- main -->
 
   <div class="main-body">
-      <!--book -->
-      <div id="newsbook" style="box-shadow:3px 3px 3px 3px rgba(202, 202, 202, 0.5)">
+     <!--book -->
+
+      <div class="book-viewport">
+        <div class="container">
+             <div id="newsbook" style="box-shadow:3px 3px 3px 3px rgba(202, 202, 202, 0.5)">
        
+             </div>
+        </div>
       </div>
 
+      <div class="mobile-viewport">
+        <div id="container">
 
+        </div>
+      </div>  
 
   </div>
 
+
+<!-- side buttons-->
+<div class="side-button-wrapper left">
+    <a class="side-button" id="side-button-left"><span class="material-symbols-outlined">
+        arrow_back_ios_new
+        </span></a>
+    <a class="side-button" id="side-button-left-mobile"><span class="material-symbols-outlined">
+        arrow_back_ios_new
+        </span></a>
+</div>
+<div class="side-button-wrapper right">
+    <a class="side-button" id="side-button-right"><span class="material-symbols-outlined">
+        arrow_forward_ios
+        </span></a>
+    <a class="side-button" id="side-button-right-mobile"><span class="material-symbols-outlined">
+        arrow_forward_ios
+        </span></a>
+</div>
+
+
+
+<!-- bottom controls -->
   <div class="bottom-wrapper">
     <div class="bottom">
         <div style="padding-left:42px;">
@@ -142,19 +173,26 @@ home
     
     <script type="text/javascript">
 
-
+        var pageNum = 1;
 
 
         $(document).ready(function() {
 
-        // Check for click events on the navbar burger icon
-        $(".navbar-burger").click(function() {
+            // Check for click events on the navbar burger icon
+            $(".navbar-burger").click(function() {
 
-        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+            // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
             $(".navbar-burger").toggleClass("is-active");
             $(".navbar-menu").toggleClass("is-active");
+            });
 
-        });
+            $("#side-button-right-mobile").click(()=>{
+                mobileNext(pageNum)
+            })
+            $("#side-button-left-mobile").click(()=>{
+                mobilePrev(pageNum)
+            })    
+        
         });
 
         var book = $("#newsbook");
@@ -181,6 +219,16 @@ home
         if (lb){
             lb.click(e=>prevPage())
         }  
+        var sbR = $('#side-button-right')
+        var sbL = $('#side-button-left')
+
+        if (sbR){
+            sbR.click(e=>nextPage())
+        }
+        if (sbL){
+            sbL.click(e=>prevPage())
+        }
+
         
         function getLastPage(){
             if (book){
@@ -199,6 +247,8 @@ home
         lastPageBtn.click(e=>getLastPage())
 
         var zoomBtn =$('#zoomBtn')
+
+
         function zoomPage(){
 
             if(book){
@@ -231,7 +281,6 @@ home
         function addPage(page,book){
 
           if (!book.turn('hasPage',page)){
-
               var element = $('<div/>',{
                   'class':'paper-wrapper',
                   css:{'background-color':'white',
@@ -244,19 +293,67 @@ home
         }
    
       }
+      function getMobile(pg){
+        $.ajax({url:'/en/pages/'+pg,
+             success:(d)=>{
+                var div = $('<div/>',{
+                    'class':'paper-wrapper',
+                     css:{'background-color':'white',
+                          'box-shadow':'3px 3px 3px 3px rgba(202, 202, 202, 0.5)',
+                    }
+                })
+                div.html(d)
+                $("#container").append(div)
+             }
+            })
+      }
+
+      function mobileNext(pg){
+        if(pg < 8){
+
+        if($(".paper-wrapper")){
+            $(".paper-wrapper").detach()
+        }
+           pg++;
+           getMobile(pg)
+           pageNum = pg;
+        }
+      }
+      function mobilePrev(pg){
+        if(pg >1){
+        
+            if($(".paper-wrapper")){
+                $(".paper-wrapper").detach()
+            }
+            pg--;
+            getMobile(pg)
+            pageNum = pg;
+        }
+      }
+
+      $(window).resize( function() {
+           
+           
+            $('#newsbook').turn('page',pageNum)
+            }).bind('orientationchange', function() {
+             $('#newsbook').turn('resize')
+            
+         });
+    
 
 
-
-      if (book){
+     function init(){
         $("#newsbook").turn({
         elevation:50,
         gradients: true,
         autoCenter: true,
         display:'single',
+        page:1,
         pages:8,
         when:{
             turning: function(event,page,view){
             currentPage.text(page)
+            pageNum = page;
           },
               missing: function (event,pages){
             for (var i = 0; i < pages.length; i++) {
@@ -267,8 +364,11 @@ home
        
         }
       });
+     }
+      if (book){
+        init()
+        getMobile(pageNum);
       }
-   
     </script>
 
     </body>

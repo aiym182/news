@@ -48,7 +48,7 @@
   align-items: center;
   top: 50%;
   width: 22%;
-  height: 60%;
+  height: 50%;
   font-size: 11px;
   border: 3px double black;
   font-family: 'ChosunKm';
@@ -59,10 +59,11 @@
 
 .head-wrapper .title-wrapper .title-box:lang(en) {
   font-family: 'Playfair Display', serif;
+  font-size: 12px;
+  font-weight: bold;
+  width: 21%;
 }
-.head-wrapper .title-wrapper .title-box:lang(en) {
-  font-family: 'Playfair Display', serif;
-}
+
 .subhead-wrapper {
   display: flex;
   justify-content: space-between;
@@ -102,6 +103,7 @@
   font-family: 'ChosunKm';
   font-size: 20px;
   padding-bottom: 5px;
+  word-break: keep-all;
 }
 .main-wrapper .main-title:lang(en) {
   font-family: 'Playfair Display', serif;
@@ -116,6 +118,7 @@
 .main-wrapper .main-title.sub:lang(en) {
   font-family: 'Playfair Display', serif;
   font-weight: bold;
+  font-family: 15px;
   font-style: italic;
 }
 .main-wrapper .main-title.left {
@@ -125,9 +128,17 @@
   text-align: right;
 }
 .main-wrapper .part-title {
-  line-height: 1.2;
+  line-height: 1.2em;
   font-family: 'ChosunKm';
   font-size: 25px;
+  padding-bottom: 5px;
+}
+.main-wrapper .part-title:lang(en) {
+  line-height: 1.2em;
+  font-family: 'Playfair Display', serif;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
   padding-bottom: 5px;
 }
 .main-wrapper .part-title:lang(en) {
@@ -143,15 +154,16 @@
 }
 .main-wrapper .main-article:lang(en) {
   font-family: 'Droid Serif', serif;
+  font-size: 11px;
   line-height: 1.5em;
-  letter-spacing: -0.2px;
+  letter-spacing: -0.6px;
 }
 
 .section {
   padding-top: 0px;
   padding-bottom: 0px;
-  padding-right: 0.5rem;
-  padding-left: 0.5rem;
+  padding-right: 1em;
+  padding-left: 1em;
 }
 
 .section .image-wrapper {
@@ -160,6 +172,10 @@
 }
 .main-wrapper .main-article .special {
   font-size: 9px;
+}
+.main-wrapper .main-article .special:lang(en) {
+  font-size: 10px;
+  font-style: italic;
 }
 
 .main-wrapper .section-wrapper {
@@ -190,6 +206,17 @@
 }
 @media only all and (max-width: 768px) {
   .news-paper {
-    overflow: auto;
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+
+  .news-paper-wrapper {
+    margin: 16px;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .head-wrapper .title-wrapper .head-title {
+    font-size: 38px;
   }
 }

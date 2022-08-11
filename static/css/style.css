@@ -1,10 +1,14 @@
 html {
-  background-color: rgb(240, 240, 240);
+  background-color: rgb(205, 205, 205);
 }
 
 #newsbook {
   width: 612px;
   height: 792px;
+}
+
+.mobile-viewport {
+  display: none;
 }
 
 .main-body {
@@ -15,6 +19,44 @@ html {
   align-items: center;
 }
 
+/* side controls */
+.side-button-wrapper {
+  position: fixed;
+  height: 100%;
+  width: 32px;
+  z-index: 3;
+}
+
+.side-button-wrapper.left {
+  left: 0;
+  top: 0;
+}
+.side-button-wrapper.right {
+  right: 0;
+  top: 0;
+}
+
+.side-button-wrapper .side-button {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: scaleY(4);
+  height: 100px;
+  top: 45%;
+  width: 32px;
+}
+.side-button-wrapper a {
+  color: rgba(202, 202, 202, 1);
+}
+#side-button-right-mobile {
+  display: none;
+}
+#side-button-left-mobile {
+  display: none;
+}
+
+/* bottom controls */
 .button-wrapper {
   display: flex;
   align-items: center;
@@ -80,5 +122,32 @@ html {
   .button-wrapper.r {
     position: fixed;
     right: 0%;
+  }
+
+  .bottom-wrapper {
+    display: none;
+  }
+  .book-viewport {
+    display: none;
+  }
+  .mobile-viewport {
+    display: block;
+  }
+
+  .side-button-wrapper .side-button {
+    top: 65%;
+  }
+
+  #side-button-left {
+    display: none;
+  }
+  #side-button-right {
+    display: none;
+  }
+  #side-button-right-mobile {
+    display: block;
+  }
+  #side-button-left-mobile {
+    display: block;
   }
 }
