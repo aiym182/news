@@ -16,10 +16,12 @@
     <script src="/static/javascript/turn.min.js"></script>
     <script type="text/javascript" src="/static/javascript/modernizr.2.5.3.min.js"></script> 
     <script type="text/javascript" src="/static/javascript/modal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
+
     <title>국립백두대간수목원 | 시드볼트 뉴스</title>
 </head>
 <body>
-  <nav class="navbar has-shadow is-success" role="navigation" aria-label="main navigation">
+  <nav class="navbar has-shadow is-dark" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" href="https://www.bdna.or.kr/">
         <img src="static/image/logo.png">
@@ -157,8 +159,78 @@
     </div> 
   </div>
 
-    
+  <!-- mobile bottom controls-->
 
+  <div class="mobile-bottom-wrapper">
+    <div class="mobile-controls-left">
+
+    </div>
+    <div class="mobile-controls">
+        <a id="mobile-first-btn">
+            <div class="button-wrapper">
+                <div class="circle">
+                    <span class="material-symbols-outlined">first_page</span>
+                </div>
+            </div>
+        </a>
+        <a id="mobile-previous-btn">
+            <div class="button-wrapper">
+                <div class="circle">
+                    <span class="material-symbols-outlined">chevron_left</span>
+                </div>
+            </div>
+        </a>
+        <div class="page-indicator">
+            <p id="mobile-current-page"></p>
+            <p>/</p>
+            <p>8</p>
+        </div>
+        <a id="mobile-next-btn">
+            <div class="button-wrapper">
+                <div class="circle">
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </div>
+            </div>
+        </a>
+        <a id="mobile-last-btn">
+            <div class="button-wrapper">
+                <div class="circle">
+                    <span class="material-symbols-outlined">last_page</span>
+                </div>
+            </div>
+        </a>
+
+    </div>
+
+    <div class="mobile-controls-right">
+        <a id="scroll-to-top" >
+            <div class="button-wrapper">
+                <div class="circle">
+                    <span class="material-symbols-outlined">
+                        keyboard_double_arrow_up
+                    </span>
+                </div>
+            </div>
+        </a>
+    </div>
+
+  </div>
+
+  
+
+  <!--modal-->
+  <div id ="modal" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <p class="image is-4by3">
+        <img src="https://bulma.io/images/placeholders/1280x960.png" alt="">
+      </p>
+    </div>
+    <button class="modal-close is-large" aria-label="close"></button>
+  </div>
+
+
+  
 
     
 
@@ -166,7 +238,6 @@
     <script type="text/javascript">
 
         var pageNum = 1;
-
 
         $(document).ready(function() {
 
@@ -177,26 +248,62 @@
             $(".navbar-burger").toggleClass("is-active");
             $(".navbar-menu").toggleClass("is-active");
             });
-
+            refreshPageNum(pageNum)
             $("#side-button-right-mobile").click(()=>{
                 mobileNext(pageNum)
+                refreshPageNum( pageNum)
             })
             $("#side-button-left-mobile").click(()=>{
                 mobilePrev(pageNum)
-            })    
-        
+                refreshPageNum( pageNum)
+            })
+            $("#mobile-first-btn").on('click',e=>{ 
+                e.preventDefault()
+                mobileFirst()
+                refreshPageNum(1)
+
+                })
+            $("#mobile-previous-btn").on('click',e=> {
+                e.preventDefault()
+                mobilePrev(pageNum)
+                refreshPageNum(pageNum)
+            })
+            $("#mobile-next-btn").on('click',e=>{
+                
+                e.preventDefault()
+                mobileNext(pageNum)
+                refreshPageNum(pageNum)
+            })
+            $("#mobile-last-btn").on('click',e=>{
+                e.preventDefault()
+                mobileLast()
+                refreshPageNum(8)
+            })
+
+
+            $("#scroll-to-top").on('click',e=>{
+            e.preventDefault()
+            $('html, body').animate({ scrollTop: 0 }, 'slow', ()=>{});   
+             })
+
         });
 
         var book = $("#newsbook");
 
         function nextPage(){
             if (book){
+
+                pageZoomed()
                 book.turn('next')
+
             }
         }
         function prevPage(){
            if (book){
+
+            pageZoomed()
             book.turn('previous')
+
            }
         }
         var currentPage = $('#current-page');
@@ -224,11 +331,15 @@
         
         function getLastPage(){
             if (book){
+
+                pageZoomed()
                 book.turn('page',8)
+
             }
         }
         function getFirstPage(){
             if (book){
+                pageZoomed()
                 book.turn('page',1)
             }
         }
@@ -240,6 +351,19 @@
 
         var zoomBtn =$('#zoomBtn')
 
+
+        function pageZoomed(){
+            
+            var pageNum = book.turn('page')
+            var currentP = $(".p"+pageNum)
+            if( currentP.hasClass("is-zoomed")){
+                currentP.css("zoom","100%")
+                book.turn('disable',false)
+                book.turn('zoom',1,5000)
+
+                currentP.removeClass("is-zoomed")
+            }
+        }
 
         function zoomPage(){
 
@@ -265,9 +389,11 @@
         zoomBtn.click((e)=>zoomPage())
 
         function loadPage(element,page){
-        $.ajax({url:'/pages/'+page,}).done((d)=>{
+        $.ajax({url:'/pages/'+page,success:(d)=>{
+
             element.html(d)
-            },)
+
+            }})
         }
 
         function addPage(page,book){
@@ -285,6 +411,11 @@
         }
    
       }
+      function refreshPageNum(pageNum){
+        $("#mobile-current-page").text(pageNum)
+
+      }
+
       function getMobile(pg){
         $.ajax({url:'/pages/'+pg,
              success:(d)=>{
@@ -294,8 +425,39 @@
                           'box-shadow':'3px 3px 3px 3px rgba(202, 202, 202, 0.5)',
                     }
                 })
-                div.html(d)
-                $("#container").append(div)
+                var newPage = div.html(d)
+
+                  var triggers = newPage.find(".modal-trigger")
+                  var ids= []
+                    triggers.map((index,ele)=>{
+                        
+                   ids.push(ele.getAttribute('id'))
+
+                    })
+                
+                // for(let i=0; i<ids.length;i++){
+                //     $('#'+ids[i]).on('click',(e)=>{
+                //     e.preventDefault()
+                //     var ele = $('#'+ids[i])
+                //     let url= ele.children('img').attr('src')
+                //     $(".modal").find('img').attr("src",url)
+                //     $(".modal").addClass('is-active')
+
+                //     if(".modal is-active"){
+                //         $('html,body').css({
+                //             overflow:'hidden',
+                //             height:'100%',
+                //         })
+                //     } else{
+                //         $('html,body').css({
+                //             overflow:'auto',
+                //             height:'100%',
+                //         })
+                //     }
+                // })}
+
+          
+                $("#container").append(newPage)
              }
             })
       }
@@ -321,32 +483,53 @@
             getMobile(pg)
             pageNum = pg;
         }
-      }
+    }
+    function mobileLast(){
+        if($(".paper-wrapper")) $(".paper-wrapper").detach()
+        getMobile(8)
+        pageNum= 8;
+    }
+    function mobileFirst(){
+        if($(".paper-wrapper")) $(".paper-wrapper").detach()
+        getMobile(1)
+        pageNum=1;
+    }
 
-    //   $(window).resize( function() {
-           
-           
-    //         $('#newsbook').turn('page',pageNum)
-    //         }).bind('orientationchange', function() {
-    //          $('#newsbook').turn('resize')
-            
-    //      });
-    
+      $(window).on('resize',_.debounce(onResize,300))
+
+        function onResize(){
+
+             var width = $(this).width()
+            if (width>768){
+                if(!$('#newsbook').turn('is')){
+                    init(pageNum)
+                }
+            } else{
+                if($('#newsbook').turn('is')) {
+                    $('#newsbook').turn('destroy')
+                }
+                if($(".paper-wrapper")) $(".paper-wrapper").detach()
+                getMobile(pageNum)
+            }
+        }
 
 
-     function init(){
+     function init(p){
+
+        currentPage.text(p)
         $("#newsbook").turn({
         elevation:50,
         gradients: true,
         autoCenter: true,
         display:'single',
-        page:1,
+        page:p,
         pages:8,
         when:{
-            turning: function(event,page,view){
-            currentPage.text(page)
-            pageNum = page;
-          },
+
+            turn:(event,page,view)=>{
+                currentPage.text(page)
+                  pageNum = page;
+            },
               missing: function (event,pages){
             for (var i = 0; i < pages.length; i++) {
               addPage(pages[i],$(this))
@@ -357,12 +540,13 @@
         }
       });
      }
-      if (book){
 
-        init()
+       if($(window).width() >768) {
+            init(pageNum)
+       } else{
+            getMobile(pageNum)
+       }
 
-        getMobile(pageNum);
-      }
    
     </script>
 

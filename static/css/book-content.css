@@ -217,6 +217,16 @@
   }
 
   .head-wrapper .title-wrapper .head-title {
-    font-size: 38px;
+    font-size: 28px;
+  }
+
+  .head-wrapper .title-wrapper .title-box {
+    font-size: 10px;
+    height: 60%;
+  }
+
+  .head-wrapper .title-wrapper .title-box:lang(en) {
+    font-size: 11px;
+    height: 60%;
   }
 }
