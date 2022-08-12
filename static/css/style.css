@@ -124,6 +124,7 @@ html {
   justify-content: space-between;
   align-items: flex-start;
   bottom: 0;
+  z-index: 10;
 }
 .mobile-bottom-wrapper a {
   color: black;
