@@ -1,5 +1,6 @@
 html {
   background-color: rgb(205, 205, 205);
+  overscroll-behavior: none;
 }
 
 #newsbook {
@@ -73,11 +74,6 @@ html {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-}
-
-.button-wrapper:hover .circle {
-  background-color: rgba(202, 202, 202, 1);
-  color: white;
 }
 
 .bottom-wrapper {
@@ -171,6 +167,7 @@ html {
 
   .mobile-bottom-wrapper {
     display: flex;
+    z-index: 10;
   }
   #side-button-left {
     display: none;
@@ -183,5 +180,16 @@ html {
   }
   #side-button-left-mobile {
     display: block;
+  }
+}
+
+@media (hover: hover) {
+  .button-wrapper:hover .circle {
+    background-color: rgba(202, 202, 202, 1);
+    color: white;
+  }
+
+  .side-button-wrapper a {
+    color: rgba(202, 202, 202, 1);
   }
 }
