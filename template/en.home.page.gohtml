@@ -480,11 +480,16 @@
         pageNum = 1
       }
 
-      $(window).on('resize', _.debounce(onResize, 300))
+       var initWidth = $(window).width()
+       $(window).on('resize', _.debounce(onResize, 300))
 
       function onResize() {
+
+
         var width = $(this).width()
-        if (width > 768) {
+
+        if(initWidth != width){
+           if (width > 768) {
           if (!$('#newsbook').turn('is')) {
             init(pageNum)
           }
@@ -495,7 +500,9 @@
           if ($('.paper-wrapper')) $('.paper-wrapper').detach()
           getMobile(pageNum)
         }
-      }
+        }
+     
+      } 
 
       function init(p) {
         currentPage.text(p)
