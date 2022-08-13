@@ -58,7 +58,7 @@
   border: 3px double black;
   font-family: 'ChosunKm';
   line-height: 1.5em;
-  letter-spacing: -3%;
+  letter-spacing: -0.03em;
   text-align: center;
 }
 
@@ -215,8 +215,6 @@
 @media only all and (max-width: 768px) {
   .news-paper {
     display: none;
-    overflow-y: hidden;
-    overflow-x: hidden;
   }
   .news-paper.mobile {
     display: block;

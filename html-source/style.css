@@ -88,7 +88,7 @@
   font-family: 'ChosunSm';
   font-size: 10px;
   text-align: justify;
-  letter-spacing: -3%;
+  letter-spacing: -0.03em;
 }
 
 .main-wrapper .main-article:lang(en) {
