@@ -496,6 +496,20 @@
        var initWidth = $(window).width()
        $(window).on('resize', _.debounce(onResize, 300))
 
+
+      function openModal(element){
+
+      var modal = $('#modal')
+      var url = $(element).children('img').attr('src')
+      modal.find('img').attr('src',url)
+       lockScroll()
+
+      modal.addClass("is-active")
+
+      }
+
+
+
       function onResize() {
 
 

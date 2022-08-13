@@ -245,7 +245,7 @@
     <div id="modal" class="modal">
       <div class="modal-background"></div>
       <div class="modal-content">
-        <p class="image">
+        <p class="image is-5by4">
           <img src="" alt="" />
         </p>
       </div>
@@ -492,7 +492,7 @@
        var url = $(element).children('img').attr('src')
       modal.find('img').attr('src',url)
       modal.addClass("is-active")
-
+       lockScroll()
       }
 
       function init(p) {
