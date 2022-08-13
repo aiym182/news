@@ -31,7 +31,6 @@ body {
   height: 90%;
   width: 32px;
   z-index: 3;
-  -webkit-overflow-scrolling: touch;
 }
 
 .side-button-wrapper.left {
@@ -153,12 +152,10 @@ body {
   .button-wrapper.l {
     position: fixed;
     left: 0%;
-    -webkit-overflow-scrolling: touch;
   }
   .button-wrapper.r {
     position: fixed;
     right: 0%;
-    -webkit-overflow-scrolling: touch;
   }
 
   .bottom-wrapper {
