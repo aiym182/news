@@ -216,6 +216,7 @@
 @media only all and (max-width: 768px) {
   .news-paper {
     display: none;
+    -webkit-overflow-scrolling: touch;
   }
   .news-paper.mobile {
     display: block;

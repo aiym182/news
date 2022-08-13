@@ -1,6 +1,10 @@
 html {
   background-color: rgb(205, 205, 205);
   overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+}
+body {
+  -webkit-overflow-scrolling: touch;
 }
 
 #newsbook {
