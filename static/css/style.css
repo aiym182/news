@@ -1,10 +1,9 @@
 html {
   background-color: rgb(205, 205, 205);
   overscroll-behavior: none;
-  -webkit-overflow-scrolling: touch;
 }
 body {
-  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
 }
 
 #newsbook {
@@ -32,6 +31,7 @@ body {
   height: 90%;
   width: 32px;
   z-index: 3;
+  -webkit-overflow-scrolling: touch;
 }
 
 .side-button-wrapper.left {
@@ -90,6 +90,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  -webkit-overflow-scrolling: touch;
 }
 
 .bottom-wrapper a {
@@ -127,6 +128,7 @@ body {
   align-items: flex-start;
   bottom: 0;
   z-index: 10;
+  -webkit-overflow-scrolling: touch;
 }
 .mobile-bottom-wrapper a {
   color: black;
@@ -151,10 +153,12 @@ body {
   .button-wrapper.l {
     position: fixed;
     left: 0%;
+    -webkit-overflow-scrolling: touch;
   }
   .button-wrapper.r {
     position: fixed;
     right: 0%;
+    -webkit-overflow-scrolling: touch;
   }
 
   .bottom-wrapper {
