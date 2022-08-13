@@ -18,6 +18,7 @@
   /* height: 792px; */
   overflow-y: auto;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .news-paper.mobile {
