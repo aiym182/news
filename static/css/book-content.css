@@ -156,8 +156,9 @@
   letter-spacing: -0.05em;
   font-family: 'ChosunSm';
   font-size: 12px;
-  text-align: left;
+  text-align: justify;
   word-break: keep-all;
+  word-wrap: break-word;
 }
 .main-wrapper .main-article:lang(en) {
   font-family: 'Droid Serif', serif;
