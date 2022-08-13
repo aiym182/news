@@ -157,7 +157,7 @@
   font-family: 'ChosunSm';
   font-size: 12px;
   text-align: justify;
-  word-break: keep-all;
+  word-break: normal;
   word-wrap: break-word;
 }
 .main-wrapper .main-article:lang(en) {
