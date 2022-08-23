@@ -2,13 +2,13 @@
 
 @font-face {
   font-family: 'ChosunKm';
-  src: url('ChosunKm.TTF');
+  src: url('../static/fonts/ChosunKm.TTF');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: 'ChosunSm';
-  src: url('ChosunSm.TTF');
+  src: url('../static/fonts/ChosunSm.TTF');
   font-weight: normal;
   font-style: normal;
 }
