@@ -245,4 +245,20 @@
   .main-wrapper {
     margin-top: 30px;
   }
+
+  .main-wrapper .main-article {
+    font-family: 'ChosunSm';
+    font-size: 14px;
+  }
+  .main-wrapper .main-article:lang(en) {
+    font-size: 14px;
+  }
+
+  .main-wrapper .main-article .special {
+    font-size: 12px;
+  }
+  .main-wrapper .main-article .special:lang(en) {
+    font-size: 12px;
+    font-style: italic;
+  }
 }

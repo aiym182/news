@@ -12,21 +12,30 @@
   font-weight: normal;
   font-style: normal;
 }
+body {
+  font-family: 'chosunkm';
+}
 
 .logo-wrapper {
   width: 1200px;
   height: 630px;
 }
-.head-title {
-  width: 100%;
+.head-wrapper {
   height: 75%;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'ChosunKm';
-  font-size: 12rem;
+  width: 100%;
 }
-.head-sub {
+.title {
+  font-size: 10rem;
+}
+.title-sub {
+  font-size: 3rem;
+  text-align: center;
+  letter-spacing: 1rem;
+}
+.bottom {
   width: 100%;
   height: 107px;
   display: flex;
@@ -34,6 +43,6 @@
   align-items: center;
   border-top: 3px solid black;
   border-bottom: 3px solid black;
-  font-family: 'chosunkm';
   font-size: 3rem;
+  letter-spacing: 0.5rem;
 }
