@@ -14,10 +14,10 @@
 }
 
 .news-paper {
-  /* width: 612px; */
-  /* height: 792px; */
-  overflow-y: auto;
-  overflow-x: auto;
+  width: 8.5in;
+  height: 11in;
+  overflow-y: none;
+  overflow-x: none;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -26,25 +26,27 @@
 }
 
 .news-paper-wrapper {
-  margin: 16px;
-  max-width: 580px;
-  max-height: 760px;
+  margin: 0.5in;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .head-wrapper .title-wrapper {
+  margin-bottom: 13pt;
   height: 62px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 .head-wrapper .title-wrapper .head-title {
-  letter-spacing: -3px;
+  letter-spacing: -3pt;
   line-height: 1.2rem;
   display: flex;
   font-family: 'ChosunKm';
-  font-size: 42px;
+  font-size: 48pt;
 }
 .head-wrapper .title-wrapper .head-title:lang(en) {
+  font-size: 40pt;
   font-family: 'Playfair Display', serif;
   font-weight: 800;
 }
@@ -52,10 +54,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   top: 50%;
+  max-width: 22%;
   width: 22%;
   height: 50%;
-  font-size: 11px;
+  max-height: 50%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 12pt;
   border: 3px double black;
   font-family: 'ChosunKm';
   line-height: 1.5em;
@@ -76,8 +83,8 @@
   align-items: center;
   width: 100%;
   height: 20px;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
+  border-top: 1pt solid black;
+  border-bottom: 1pt solid black;
   padding-top: 2px;
   padding-bottom: 2px;
 }
@@ -89,7 +96,7 @@
 .head-subtitle {
   text-align: center;
   font-family: 'ChosunKm';
-  font-size: 10px;
+  font-size: 10pt;
 }
 .head-subtitle:lang(en) {
   font-family: 'Playfair Display', serif;
@@ -97,19 +104,22 @@
 }
 
 .main-wrapper {
-  margin-top: 15px;
-  margin-bottom: 15px;
-  margin-left: 10px;
-  margin-right: 10px;
-  padding-bottom: 15px;
+  margin-top: 13pt;
 }
 .main-wrapper .main-title {
+  padding-top: 5pt;
   text-align: center;
   line-height: 1.2;
   font-family: 'ChosunKm';
-  font-size: 20px;
-  padding-bottom: 5px;
+  font-size: 20pt;
   word-break: keep-all;
+}
+.main-wrapper .main-subtitle {
+  text-align: center;
+  line-height: 1.5;
+  font-family: 'ChosunKm';
+  font-size: 12pt;
+  letter-spacing: -0.03em;
 }
 .main-wrapper .main-title:lang(en) {
   font-family: 'Playfair Display', serif;
@@ -119,7 +129,8 @@
   text-align: center;
   line-height: 1.5;
   font-family: 'ChosunKm';
-  font-size: 12px;
+  font-size: 14pt;
+  letter-spacing: -0.03em;
 }
 .main-wrapper .main-title.sub:lang(en) {
   font-family: 'Playfair Display', serif;
@@ -153,9 +164,9 @@
 }
 .main-wrapper .main-article {
   line-height: 1.5em;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.03em;
   font-family: 'ChosunSm';
-  font-size: 12px;
+  font-size: 10pt;
   text-align: justify;
   word-break: normal;
   word-wrap: break-word;
@@ -179,7 +190,7 @@
   text-align: center;
 }
 .main-wrapper .main-article .special {
-  font-size: 9px;
+  font-size: 9pt;
 }
 .main-wrapper .main-article .special:lang(en) {
   font-size: 10px;
@@ -189,8 +200,8 @@
 .main-wrapper .section-wrapper {
   display: flex;
   justify-content: space-evenly;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  padding-top: 11pt;
+  padding-bottom: 11pt;
 }
 .main-wrapper .section-wrapper.col {
   flex-direction: column;
@@ -221,21 +232,36 @@
   }
   .news-paper.mobile {
     display: block;
+    width: 100%;
+    height: 100%;
   }
 
   .news-paper-wrapper {
-    margin: 16px;
+    margin: 0px 5px;
     max-width: 100%;
     max-height: 100%;
   }
-
+  .head-wrapper {
+    padding: 15px 0px;
+  }
+  .head-subtitle {
+    text-align: center;
+    font-family: 'ChosunKm';
+    font-size: 7pt;
+  }
   .head-wrapper .title-wrapper .head-title {
-    font-size: 28px;
+    font-size: 20pt;
+  }
+
+  .head-wrapper .title-wrapper .head-title:lang(en) {
+    letter-spacing: -3pt;
+    font-size: 16;
   }
 
   .head-wrapper .title-wrapper .title-box {
-    font-size: 10px;
-    height: 60%;
+    font-size: 7pt;
+    height: 30%;
+    max-height: 30%;
   }
 
   .head-wrapper .title-wrapper .title-box:lang(en) {
@@ -245,11 +271,20 @@
   .main-wrapper {
     margin-top: 30px;
   }
-
+  .main-wrapper .main-title {
+    font-size: 22px;
+  }
+  .main-wrapper .main-subtitle {
+    font-size: 15px;
+  }
+  .main-wrapper .main-title.sub {
+    font-size: 14px;
+  }
   .main-wrapper .main-article {
     font-family: 'ChosunSm';
     font-size: 14px;
   }
+
   .main-wrapper .main-article:lang(en) {
     font-size: 14px;
   }
