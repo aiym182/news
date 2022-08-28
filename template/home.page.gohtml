@@ -29,6 +29,10 @@
       src="/static/javascript/modernizr.2.5.3.min.js"
     ></script>
     <script type="text/javascript" src="/static/javascript/modal.js"></script>
+    <script
+      type="text/javascript"
+      src="/static/javascript/panzoom.min.js"
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
 
     <title>국립백두대간수목원 | 시드볼트 뉴스</title>
@@ -86,27 +90,89 @@
       </div>
     </nav>
 
+  
     <!-- main -->
 
     <div class="main-body">
       <!--book -->
-
       <div class="book-viewport">
-        <div class="container">
-          <div
-            id="newsbook"
-            style="box-shadow: 3px 3px 3px 3px rgba(202, 202, 202, 0.5);"
-          ></div>
-        </div>
+        <div
+          id="newsbook"
+          style="box-shadow: 3px 3px 3px 3px rgba(202, 202, 202, 0.5);"
+        ></div>
       </div>
 
       <div class="mobile-viewport">
         <div id="container"></div>
       </div>
+
+      <!-- bottom controls -->
+      <div class="bottom-wrapper">
+        <div class="bottom">
+          <div style="width: 100px;"></div>
+
+          <div class="controls">
+            <a id="firstBtn">
+              <div class="button-wrapper">
+                <div class="circle">
+                  <span class="material-symbols-outlined">first_page</span>
+                </div>
+              </div>
+            </a>
+
+            <a id="leftBtn">
+              <div class="button-wrapper">
+                <div class="circle">
+                  <span class="material-symbols-outlined">chevron_left</span>
+                </div>
+              </div>
+            </a>
+
+            <div class="page-indicator">
+              <p id="current-page">1</p>
+              <p>/</p>
+              <p id="total-page">8</p>
+            </div>
+
+            <a id="rightBtn">
+              <div class="button-wrapper">
+                <div class="circle">
+                  <span class="material-symbols-outlined">
+                    chevron_right
+                  </span>
+                </div>
+              </div>
+            </a>
+
+            <a id="lastBtn">
+              <div class="button-wrapper">
+                <div class="circle">
+                  <span class="material-symbols-outlined">
+                    last_page
+                  </span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- zoom -->
+          <div style="width: 100px; padding-left: 50px;">
+            <a id="zoomBtn">
+              <div class="button-wrapper">
+                <div class="circle">
+                  <span class="material-symbols-outlined">
+                    zoom_in
+                  </span>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- side buttons-->
-<div class="side-button-wrapper left">
+    <div class="side-button-wrapper left">
       <a class="side-button" id="side-button-left">
         <span class="material-symbols-outlined">
           arrow_back_ios_new
@@ -129,75 +195,11 @@
           arrow_forward_ios
         </span>
       </a>
-    </div> 
-
-    <!--bottom controls -->
-     <div class="bottom-wrapper">
-      <div class="bottom">
-        <div style="padding-left: 42px;"></div>
-
-        <div class="controls">
-          <a id="firstBtn">
-            <div class="button-wrapper">
-              <div class="circle">
-                <span class="material-symbols-outlined">first_page</span>
-              </div>
-            </div>
-          </a>
-
-          <a id="leftBtn">
-            <div class="button-wrapper">
-              <div class="circle">
-                <span class="material-symbols-outlined">chevron_left</span>
-              </div>
-            </div>
-          </a>
-
-          <div class="page-indicator">
-            <p id="current-page">1</p>
-            <p>/</p>
-            <p id="total-page">8</p>
-          </div>
-
-          <a id="rightBtn">
-            <div class="button-wrapper">
-              <div class="circle">
-                <span class="material-symbols-outlined">
-                  chevron_right
-                </span>
-              </div>
-            </div>
-          </a>
-
-          <a id="lastBtn">
-            <div class="button-wrapper">
-              <div class="circle">
-                <span class="material-symbols-outlined">
-                  last_page
-                </span>
-              </div>
-            </div>
-          </a>
-        </div>
-
-        <!-- zoom -->
-        <div style="padding-right: 10px;">
-          <a id="zoomBtn">
-            <div class="button-wrapper">
-              <div class="circle">
-                <span class="material-symbols-outlined">
-                  zoom_in
-                </span>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
     </div>
 
     <!-- mobile bottom controls-->
 
-   <div class="mobile-bottom-wrapper">
+    <div class="mobile-bottom-wrapper">
       <div class="mobile-controls-left"></div>
       <div class="mobile-controls">
         <a id="mobile-first-btn">
@@ -259,9 +261,18 @@
       <button class="modal-close is-large" aria-label="close"></button>
     </div>
 
+    <!-- side panel-->
+
+    <div class="zoom-menu-wrapper">
+      <a id="zoomReset"class="menu-button" ><span class="material-symbols-outlined">restart_alt</span></a>
+      <a id="zoomRemove"class="menu-button" style="border-bottom:.5px solid rgba(202, 202, 202, 0.5); margin-right:5px;border-top:.5px solid rgba(202, 202, 202, 0.5)"><span class="material-symbols-outlined">remove</span></a> 
+      <input id="zoom-range"type="range" min="0.50" max="2.5" step=".25">
+      <a id="zoomAdd"class="menu-button" style="border-bottom:.5px solid rgba(202, 202, 202, 0.5); margin-left:5px"><span class="material-symbols-outlined">add</span></a>
+
+    </div>
+
     <script type="text/javascript">
       var pageNum = 1
-
 
       $(document).ready(function () {
         // Check for click events on the navbar burger icon
@@ -304,22 +315,42 @@
           e.preventDefault()
           $('html, body').animate({ scrollTop: 0 }, 'slow', () => {})
         })
-
       })
 
       var book = $('#newsbook')
 
       function nextPage() {
         if (book) {
-          pageZoomed()
           book.turn('next')
         }
+        var bv = $('.book-viewport')
+        if (bv.hasClass('is-active')){
+          zoomMenu.css("visibility","hidden")
+            panzoom.reset()
+            panzoom.setOptions({ 
+              cursor:'default',
+              disablePan:true,
+              disableZoom:true,
+            })
+            bv.removeClass('is-active')
+          }
       }
       function prevPage() {
         if (book) {
-          pageZoomed()
           book.turn('previous')
         }
+
+        var bv = $('.book-viewport')
+        if (bv.hasClass('is-active')){
+          zoomMenu.css("visibility","hidden")
+            panzoom.reset()
+            panzoom.setOptions({ 
+              cursor:'default',
+              disablePan:true,
+              disableZoom:true,
+            })
+            bv.removeClass('is-active')
+          }
       }
       var currentPage = $('#current-page')
       var totalPage = $('#total-page')
@@ -344,15 +375,36 @@
 
       function getLastPage() {
         if (book) {
-          pageZoomed()
           book.turn('page', 8)
         }
+
+        var bv = $('.book-viewport')
+        if (bv.hasClass('is-active')){
+          zoomMenu.css("visibility","hidden")
+            panzoom.reset()
+            panzoom.setOptions({ 
+              cursor:'default',
+              disablePan:true,
+              disableZoom:true,
+            })
+            bv.removeClass('is-active')
+          }
       }
       function getFirstPage() {
         if (book) {
-          pageZoomed()
           book.turn('page', 1)
         }
+        var bv = $('.book-viewport')
+        if (bv.hasClass('is-active')){
+          zoomMenu.css("visibility","hidden")
+            panzoom.reset()
+            panzoom.setOptions({ 
+              cursor:'default',
+              disablePan:true,
+              disableZoom:true,
+            })
+            bv.removeClass('is-active')
+          }
       }
       var firstPageBtn = $('#firstBtn')
       var lastPageBtn = $('#lastBtn')
@@ -360,45 +412,73 @@
       firstPageBtn.click((e) => getFirstPage())
       lastPageBtn.click((e) => getLastPage())
 
-      var zoomBtn = $('#zoomBtn')
+      const zoomBtn = $('#zoomBtn')
+      const zoomElement = document.getElementById('newsbook')
+      const zoomRange = document.getElementById('zoom-range')
+      const zoomIn = $('#zoomAdd')
+      const zoomOut = $('#zoomRemove')
+      const zoomReset =$("#zoomReset")
+      const zoomMenu = $('.zoom-menu-wrapper')
+      
+      const panzoom = Panzoom(zoomElement, {
+        cursor: 'default',
+        maxScale: 2.5,
+        origin: '0%,0%',
+        minScale: .50,
+        step: 0.25,
+        animate:true,
+        disablePan:true,
+        disableZoom:true,
+      })
+      zoomRange.addEventListener("input", e =>{
+        panzoom.zoom(e.target.valueAsNumber)
+      })
 
-      function pageZoomed() {
-        var pageNum = book.turn('page')
-        var currentP = $('.p' + pageNum)
-        if (currentP.hasClass('is-zoomed')) {
-          currentP.css('zoom', '100%')
-          book.turn('disable', false)
-          book.turn('zoom', 1, 5000)
 
-          currentP.removeClass('is-zoomed')
-        }
-      }
+      zoomIn.click((e)=>{
+        panzoom.zoomIn()
+        zoomRange.value= panzoom.getScale()
+      })
+      zoomOut.click((e)=>{
+        panzoom.zoomOut()
+        zoomRange.value= panzoom.getScale()
+      })
+      zoomReset.click((e)=>{
+        panzoom.reset()
+        zoomRange.value=panzoom.getScale()
+      })
+
 
       function zoomPage() {
-        if (book) {
-          var pageNum = book.turn('page')
-          var currentP = $('.p' + pageNum)
-
-          if (currentP.hasClass('is-zoomed')) {
-            currentP.css('zoom', '100%')
-            book.turn('disable', false)
-            book.turn('zoom', 1, 5000)
-            currentP.removeClass('is-zoomed')
-          } else {
-            currentP.css('zoom', '200%')
-            book.turn('disable', true)
-            book.turn('zoom', 2, 5000)
-            currentP.addClass('is-zoomed')
-          }
+        var bv = $('.book-viewport')
+        if (bv.hasClass('is-active')) {
+          zoomMenu.css("visibility","hidden")
+          panzoom.reset()
+          panzoom.setOptions({ 
+            cursor:'default',
+            disablePan:true,
+            disableZoom:true,
+          })
+          bv.removeClass('is-active')
+        } else {
+          zoomMenu.css("visibility","visible")
+          panzoom.setOptions({ 
+            cursor:'move',
+            disablePan:false,
+            disableZoom:false,
+          })
+          panzoom.zoomIn()
+          zoomRange.value= panzoom.getScale()
+          bv.addClass('is-active')
         }
       }
       zoomBtn.click((e) => zoomPage())
 
       function loadPage(element, page) {
         $.ajax({
-          url: '/pages/' + page,
+          url: 'pages/' + page,
           success: (d) => {
-          let finPage = element.html(d)
+            element.html(d)
           },
         })
       }
@@ -411,7 +491,7 @@
           })
 
           if (book.turn('addPage', element, page)) {
-              loadPage(element, page)
+            loadPage(element, page)
           }
         }
       }
@@ -432,6 +512,11 @@
             })
             var newPage = div.html(d)
 
+            var triggers = newPage.find('.modal-trigger')
+            var ids = []
+            triggers.map((index, ele) => {
+              ids.push(ele.getAttribute('id'))
+            })
             $('#container').append(newPage)
           },
         })
@@ -469,43 +554,38 @@
       }
 
       var initWidth = $(window).width()
-       $(window).on('resize', _.debounce(onResize, 300))
+      $(window).on('resize', _.debounce(onResize, 300))
+
+      function openModal(element) {
+        var modal = $('#modal')
+        var url = $(element).children('img').attr('src')
+        modal.find('img').attr('src', url)
+        lockScroll()
+
+        modal.addClass('is-active')
+      }
 
       function onResize() {
-
-
         var width = $(this).width()
 
-        if(initWidth != width){
-           if (width > 768) {
-          if (!$('#newsbook').turn('is')) {
-            init(pageNum)
+        if (initWidth != width) {
+          if (width > 768) {
+            if (!$('#newsbook').turn('is')) {
+              init(pageNum)
+            }
+          } else {
+            if ($('#newsbook').turn('is')) {
+              $('#newsbook').turn('destroy')
+            }
+            if ($('.paper-wrapper')) $('.paper-wrapper').detach()
+            getMobile(pageNum)
           }
-        } else {
-          if ($('#newsbook').turn('is')) {
-            $('#newsbook').turn('destroy')
-          }
-          if ($('.paper-wrapper')) $('.paper-wrapper').detach()
-          getMobile(pageNum)
         }
-        }
-     
-      } 
-
-
-      function openModal(element){
-
-      var modal = $('#modal')
-       var url = $(element).children('img').attr('src')
-      modal.find('img').attr('src',url)
-      modal.addClass("is-active")
-       lockScroll()
       }
 
       function init(p) {
         currentPage.text(p)
         $('#newsbook').turn({
-          elevation: 50,
           gradients: true,
           autoCenter: true,
           display: 'single',

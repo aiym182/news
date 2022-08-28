@@ -24,6 +24,10 @@ html {
   overflow-x: none;
   -webkit-overflow-scrolling: touch;
 }
+.news-paper:lang(en) {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
 
 .news-paper.mobile {
   display: none;
@@ -177,7 +181,7 @@ html {
 }
 .main-wrapper .main-article:lang(en) {
   font-family: 'Droid Serif', serif;
-  font-size: 12px;
+  font-size: 11pt;
   line-height: 1.5em;
   letter-spacing: -0.6px;
 }
@@ -258,8 +262,8 @@ html {
   }
 
   .head-wrapper .title-wrapper .head-title:lang(en) {
-    letter-spacing: -3pt;
-    font-size: 16;
+    letter-spacing: 0;
+    font-size: 20px;
   }
 
   .head-wrapper .title-wrapper .title-box {
